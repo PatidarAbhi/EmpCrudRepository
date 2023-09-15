@@ -29,12 +29,32 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session=request.getSession(false);
-		if(session!=null) {
-		        session.invalidate();
-		       request.setAttribute("logout", "logout successful");
+		HttpSession session = request.getSession(false);
+		/*
+		 * if(session!=null) { session.invalidate(); request.setAttribute("logout",
+		 * "logout successful"); } response.sendRedirect(request.getContextPath() +
+		 * "/login.jsp");
+		 */
+
+		if (session != null) {
+			Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+
+			if (isAdmin != null && isAdmin) {
+				// This is an admin session, perform admin logout actions
+				session.invalidate();
+				System.out.println("Session expire for admin");
+				response.sendRedirect(request.getContextPath() + "/login.jsp");
+			} else {
+				// This is a regular user session, perform user logout actions
+				System.out.println("Session expire for user");
+				session.invalidate();
+				response.sendRedirect(request.getContextPath() + "/login.jsp");
+			}
+			/*
+			 * response.sendRedirect(request.getContextPath() + "/login.jsp");
+			 */
 		}
-		 response.sendRedirect(request.getContextPath() + "/login.jsp");
+
 	}
 
 	/**

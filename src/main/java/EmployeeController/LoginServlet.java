@@ -52,25 +52,27 @@ public class LoginServlet extends HttpServlet {
 			Employee emp = service.validateEmployee(userName, password);
 			System.out.println("userName::" + userName + " Password::" + password);
 			if (emp != null) {
-				HttpSession ses =request.getSession();
+				
 				System.out.println("Emp not null");
 				if(!emp.isAdmine())
 				{
+					HttpSession ses =request.getSession();
 					System.out.println("not a admin");
 					 ses=request.getSession();
 					ses.setAttribute("emp", emp);
-					ses.setAttribute("isAdmin", "false");
+					ses.setAttribute("isAdmin", false);
 					 request.setAttribute("login", "login successful");
 					RequestDispatcher rd=request.getRequestDispatcher("Employee.jsp");
 					 rd.forward(request, response);
 				}
 				else
 				{
+					HttpSession ses =request.getSession();
 					System.out.println("session in login::"+ses);
 					List<Employee> empList=service.getListOfEmployee();
 					 ses=request.getSession();
 					ses.setAttribute("empList", empList);
-					ses.setAttribute("isAdmin", "true");
+					ses.setAttribute("isAdmin", true);
 					request.setAttribute("login", "login successful");
 					RequestDispatcher rd=request.getRequestDispatcher("admin.jsp");
 					rd.forward(request, response);
