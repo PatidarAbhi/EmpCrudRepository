@@ -37,7 +37,7 @@ public class EditEmployee extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Inside get edit");
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 		if (session != null) {
 			System.out.println("session is not null in edit");
 			String firstName = request.getParameter("firstName");

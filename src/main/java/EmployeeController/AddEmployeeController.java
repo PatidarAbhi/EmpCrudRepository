@@ -45,7 +45,7 @@ public class AddEmployeeController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session=request.getSession(true);
+		HttpSession session=request.getSession(false);
 		if(session!=null) {
 			System.out.println("session in add::"+session);
 		System.out.println("inside dopost of add emp");
