@@ -36,10 +36,8 @@ public class EditEmployee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Inside get edit");
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			System.out.println("session is not null in edit");
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			float salary = Float.parseFloat(request.getParameter("salary"));
@@ -64,25 +62,19 @@ public class EditEmployee extends HttpServlet {
 					employee.setAdmine(true);
 			}
 			employee.setSalary(salary);
-			System.out.println(employee);
 			String status = service.editEmployee(employee);
-			System.out.println("status in edit::" + status);
-			System.out.println("forward in edit::" + forward);
 			if (forward == null) {
 				if (status.equals("success")) {
 					List<Employee> empList = service.getListOfEmployee();
 					session.setAttribute("empList", empList);
-					request.setAttribute("edit", "update successful");
 					response.sendRedirect(request.getContextPath() + "/admin.jsp");
 				}
 			} else {
 				if (status.equals("success")) {
-					request.setAttribute("edit", "update successful");
 					response.sendRedirect(request.getContextPath() + "/Employee.jsp");
 				}
 			}
 		} else {
-			System.out.println("esle in edit");
 			response.sendRedirect(request.getContextPath() + "/login.jsp");
 		}
 	}

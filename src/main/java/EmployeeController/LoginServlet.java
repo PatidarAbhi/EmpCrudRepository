@@ -45,19 +45,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Inside Post");
 		if (request.getParameter("Login").equals("Login")) {
 			String userName = request.getParameter("userName");
 			String password = request.getParameter("pwd");
 			Employee emp = service.validateEmployee(userName, password);
-			System.out.println("userName::" + userName + " Password::" + password);
 			if (emp != null) {
-
-				System.out.println("Emp not null");
 				if (!emp.isAdmine()) {
 					HttpSession ses = request.getSession();
-					System.out.println("not a admin");
-					ses = request.getSession();
 					ses.setAttribute("emp", emp);
 					ses.setAttribute("isAdmin", false);
 					request.setAttribute("login", "login successful");
@@ -65,20 +59,15 @@ public class LoginServlet extends HttpServlet {
 					rd.forward(request, response);
 				} else {
 					HttpSession ses = request.getSession();
-					System.out.println("session in login::" + ses);
 					List<Employee> empList = service.getListOfEmployee();
 					ses = request.getSession();
 					ses.setAttribute("empList", empList);
 					ses.setAttribute("isAdmin", true);
-					request.setAttribute("login", "login successful");
-					RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-					rd.forward(request, response);
+					response.sendRedirect("admin.jsp");
 				}
 			} else {
 				request.setAttribute("msg", "invalid credentials");
-				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-				rd.include(request, response);
-				System.out.println("Emp null");
+				response.sendRedirect("admin.jsp");
 			}
 		}
 	}

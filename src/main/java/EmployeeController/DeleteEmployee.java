@@ -17,39 +17,40 @@ import EmployeeService.EmployeeService;
 public class DeleteEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EmployeeService service = new EmployeeService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteEmployee() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(true);
-		if(session!=null) {
-		int id=Integer.parseInt(request.getParameter("id"));
-		String status=service.deleteEmployeeById(id);
-		if(status.equals("success")) {
-			request.setAttribute("delete", "delete successful");
-		response.sendRedirect(request.getContextPath()+"/admin.jsp");
-		}
-		}
-		else
-		{
-			response.sendRedirect(request.getContextPath() + "/login.jsp");	
-		}
-		
+	public DeleteEmployee() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		if (session != null) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			String status = service.deleteEmployeeById(id);
+			if (status.equals("success")) {
+				response.sendRedirect(request.getContextPath() + "/admin.jsp");
+			}
+		} else {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

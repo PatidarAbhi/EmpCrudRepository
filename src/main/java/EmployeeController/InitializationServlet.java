@@ -10,7 +10,6 @@ public class InitializationServlet extends HttpServlet {
 	private EmployeeService service=new EmployeeService(); 
 	@Override
 	public void init() throws ServletException {
-		System.out.println("Init");
 		service.initilaizeEmployee();
 	}
 	

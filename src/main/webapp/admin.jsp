@@ -51,16 +51,11 @@ if (employeeList != null && !employeeList.isEmpty()) {
 	lastEmployeeId = lastEmployee.getId();
 }
 %>
-
-
 <script>
-           
-// Assume you have a JavaScript variable 'isAdminValue' representing the user's isAdmin status
+        
      function checkBox(condition,id){
 	
-            var isAdminValue = condition; // Set this to the user's actual isAdmin status (true or false)
-            console.log(isAdminValue);
-            // Set the initial state of the radio buttons based on isAdminValue
+            var isAdminValue = condition;
             if (isAdminValue) {
                 document.getElementById("isAdminYes"+id).checked = true;
             } else {
@@ -82,7 +77,7 @@ if (employeeList != null) {
 					<th>FirstName</th>
 					<th>LastName</th>
 					<th>Salary</th>
-					<th>Is Admine</th>
+					<th>Is Admin</th>
 					<th>Operations</th>
 					<th>Delete</th>
 				</tr>
@@ -108,8 +103,7 @@ if (employeeList != null) {
 					<%
 					if (e.isAdmine()) {
 					%>
-					<button class="btn btn-danger" disabled="disabled">
-						<a href="deleteEmployee?id=<%=e.getId()%>" id="rishiID">Delete</a>
+					<button class="btn btn-danger" disabled="disabled">Delete
 					</button> <%
  } else {
  %>
@@ -287,14 +281,9 @@ if (employeeList != null) {
 	</button>
 	<%
 	} else {
-	   response.sendRedirect("login.jsp");
+	      response.sendRedirect("login.jsp");
 	}
 	%>
-
-
-
-
-
 </body>
 </body>
 </html>

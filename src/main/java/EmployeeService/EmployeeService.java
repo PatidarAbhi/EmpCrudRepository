@@ -20,7 +20,7 @@ public class EmployeeService {
 		e1.setUserName("aaa");
 		e1.setPasswrod("123");
 		e1.setSalary(67808f);
-		
+
 		Employee e2 = new Employee();
 		e2.setFirstName("kartik");
 		e2.setLastName("Patidar");
@@ -72,16 +72,6 @@ public class EmployeeService {
 
 	public String editEmployee(Employee employee) {
 		int id = employee.getId();
-		/*
-		 * list.stream() .map(emp -> { if (id==employee.getId()) {
-		 * emp.setFirstName(employee.getFirstName());
-		 * emp.setLastName(employee.getLastName());
-		 * emp.setPasswrod(employee.getPasswrod());
-		 * emp.setUserName(employee.getUserName()); emp.setSalary(employee.getSalary());
-		 * emp.setAdmine(employee.isAdmine()); } return emp; })
-		 * .collect(Collectors.toList());
-		 */
-
 		list.stream().filter(a -> a.getId() == id).forEach(emp -> {
 			emp.setFirstName(employee.getFirstName());
 			emp.setLastName(employee.getLastName());
